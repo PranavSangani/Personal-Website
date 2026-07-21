@@ -16,14 +16,15 @@ const ICONS = {
     minesweeper: minesweeper_icon,
 };
 
-// Renders one button per open window. Clicking a button toggles that window
-// (closes it here, since windows don't yet minimize). `items` is the list of
-// currently-open windows: { key, label, onClick }.
+// Renders one button per open window. Clicking a button minimizes the window if
+// it's showing, or restores it if minimized. `items`: { key, label, active,
+// onClick } where `active` means the window is currently shown (not minimized).
 function Taskbar({items}) {
     return (
         <div className={'taskbar'}>
             {items.map((w) => (
-                <button className={'taskbar_btn'} key={w.key} onClick={w.onClick} title={w.label}>
+                <button className={'taskbar_btn' + (w.active ? ' taskbar_btn_active' : '')}
+                        key={w.key} onClick={w.onClick} title={w.label}>
                     <img src={ICONS[w.key]} alt={''}/>
                     <span>{w.label}</span>
                 </button>

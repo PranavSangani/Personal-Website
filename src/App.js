@@ -2,7 +2,6 @@ import './App.css';
 import Paint from './Paint'
 import Solitaire from "./Solitaire";
 import React from "react";
-import {Window} from 'react-windows-xp';
 import "react-minesweeper/lib/minesweeper.css";
 import Minesweeper from 'react-minesweeper';
 import Icons from "./Icons";
@@ -12,87 +11,44 @@ import Resume from "./Resume";
 import StartMenu from "./StartMenu";
 import Projects from "./Projects";
 import Taskbar from "./Taskbar";
+import XPWindow from "./XPWindow";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
 
-class App extends React.Component {
-    onClickRestartMinesweeper = () => {
-        this.setState({
-            isFocusMinesweeper: !this.state.isFocusMinesweeper
-        }, () => {
-            this.setState({
-                isFocusMinesweeper: !this.state.isFocusMinesweeper
-            })
-        })
-    }
-    onClickMinesweeper = () => {
-        this.setState({
-            isFocusMinesweeper: !this.state.isFocusMinesweeper
-        })
-    }
-    onClickSolitaire = () => {
-        this.setState({
-            isFocusSolitaire: !this.state.isFocusSolitaire
-        })
-    }
-    onClickPuzzle = () => {
-        this.setState({
-            isFocusPuzzle: !this.state.isFocusPuzzle
-        })
-    }
-    onClickResume = () => {
-        this.setState({
-            isFocusResume: !this.state.isFocusResume
-        })
-    }
-    onClickPaint = () => {
-        this.setState({
-            isFocusPaint: !this.state.isFocusPaint
-        })
-    }
-    onClickStartMessage = () => {
-        this.setState({
-            startMessage: !this.state.startMessage
-        })
-    }
-    onClickStartMenu = () => {
-        this.setState({
-            startMenu: !this.state.startMenu
-        })
-    }
-    onCloseStartMenu = () => {
-        this.setState({
-            startMenu: false
-        })
-    }
-    onClickProjects = () => {
-        this.setState({
-            isFocusProjects: !this.state.isFocusProjects
-        })
-    }
-    // Openers used by the Start Menu (always open, never toggle-closed).
-    onOpenAbout = () => this.setState({startMessage: true})
-    onOpenResume = () => this.setState({isFocusResume: true})
-    onOpenProjects = () => this.setState({isFocusProjects: true})
+// Per-window metadata: taskbar label, title-bar text, DOM id, and the default
+// position/size used the first time the window opens.
+const WINDOW_META = {
+    notice:      {label: 'Notice',           title: 'Notice',           id: 'start_message',      rect: {x: 300, y: 90,  width: 720, height: 520}},
+    resume:      {label: 'Resume',           title: 'Resume',           id: 'resume_window',      rect: {x: 210, y: 40,  width: 520, height: 640}},
+    projects:    {label: 'My Projects',      title: 'My Projects',      id: 'projects_window',    rect: {x: 350, y: 120, width: 780, height: 470}},
+    puzzle:      {label: 'Puzzle',           title: 'Puzzle',           id: 'puzzle',             rect: {x: 260, y: 70,  width: 720, height: 560}},
+    paint:       {label: 'Paint',            title: 'Paint',            id: 'paint_window',       rect: {x: 200, y: 60,  width: 900, height: 600}},
+    solitaire:   {label: 'Spider Solitaire', title: 'Spider Solitaire', id: 'solitaire_window',   rect: {x: 220, y: 60,  width: 900, height: 600}},
+    minesweeper: {label: 'Minesweeper',      title: 'Minesweeper',      id: 'minesweeper_window', rect: {x: 320, y: 70,  width: 380, height: 520}},
+};
 
+// Taskbar order / z-order iteration order.
+const WINDOW_KEYS = ['notice', 'resume', 'projects', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
+
+class App extends React.Component {
     state = {
-        isFocusMinesweeper: false,
-        isFocusSolitaire: false,
-        isFocusPuzzle: false,
-        isFocusResume: false,
-        isFocusPaint: false,
-        isFocusProjects: false,
-        startMessage: true,
+        windows: {
+            notice:      {open: true,  min: false, z: 1},
+            resume:      {open: false, min: false, z: 0},
+            projects:    {open: false, min: false, z: 0},
+            puzzle:      {open: false, min: false, z: 0},
+            paint:       {open: false, min: false, z: 0},
+            solitaire:   {open: false, min: false, z: 0},
+            minesweeper: {open: false, min: false, z: 0},
+        },
+        topZ: 1,
+        minesweeperKey: 0,
         startMenu: false,
-        loading_screen: true
+        loading_screen: true,
     };
 
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                loading_screen: false
-            })
-        }, 3500);
+        setTimeout(() => this.setState({loading_screen: false}), 3500);
         document.addEventListener('mousedown', this.handleDocumentClick);
     }
 
@@ -100,92 +56,117 @@ class App extends React.Component {
         document.removeEventListener('mousedown', this.handleDocumentClick);
     }
 
-    // Close the Start Menu when clicking anywhere outside it. Clicks on the
-    // start bar are ignored here so the Start button's own handler can toggle.
+    // Close the Start Menu on any click outside it (start bar clicks are handled
+    // by the Start button's own toggle, so ignore those here).
     handleDocumentClick = (e) => {
         if (!this.state.startMenu) return;
         if (e.target.closest('.start_menu') || e.target.closest('#start_bar')) return;
         this.setState({startMenu: false});
+    };
+
+    // ----- window state helpers -----
+    updateWindow(key, patch) {
+        this.setState((s) => ({
+            windows: {...s.windows, [key]: {...s.windows[key], ...patch}},
+        }));
     }
 
-    // The set of windows currently open, in taskbar order.
-    openWindows() {
-        const all = [
-            {key: 'notice', label: 'Notice', open: this.state.startMessage, onClick: this.onClickStartMessage},
-            {key: 'resume', label: 'Resume', open: this.state.isFocusResume, onClick: this.onClickResume},
-            {key: 'projects', label: 'My Projects', open: this.state.isFocusProjects, onClick: this.onClickProjects},
-            {key: 'puzzle', label: 'Puzzle', open: this.state.isFocusPuzzle, onClick: this.onClickPuzzle},
-            {key: 'paint', label: 'Paint', open: this.state.isFocusPaint, onClick: this.onClickPaint},
-            {key: 'solitaire', label: 'Spider Solitaire', open: this.state.isFocusSolitaire, onClick: this.onClickSolitaire},
-            {key: 'minesweeper', label: 'Minesweeper', open: this.state.isFocusMinesweeper, onClick: this.onClickMinesweeper},
-        ];
-        return all.filter((w) => w.open);
+    // Raise a window to the top of the stack.
+    focusWindow = (key) => {
+        this.setState((s) => {
+            const topZ = s.topZ + 1;
+            return {topZ, windows: {...s.windows, [key]: {...s.windows[key], z: topZ}}};
+        });
+    };
+
+    // Open (or restore + focus) a window.
+    openWindow = (key) => {
+        this.setState((s) => {
+            const topZ = s.topZ + 1;
+            return {topZ, windows: {...s.windows, [key]: {...s.windows[key], open: true, min: false, z: topZ}}};
+        });
+    };
+
+    closeWindow = (key) => this.updateWindow(key, {open: false, min: false});
+
+    minimizeWindow = (key) => this.updateWindow(key, {min: true});
+
+    // Taskbar click: restore+focus if minimized, otherwise minimize.
+    onTaskbarClick = (key) => {
+        if (this.state.windows[key].min) {
+            this.openWindow(key);
+        } else {
+            this.minimizeWindow(key);
+        }
+    };
+
+    restartMinesweeper = () => this.setState((s) => ({minesweeperKey: s.minesweeperKey + 1}));
+
+    // ----- start menu / start bar -----
+    onClickStartMenu = () => this.setState((s) => ({startMenu: !s.startMenu}));
+    onCloseStartMenu = () => this.setState({startMenu: false});
+
+    // Body content for each window (some need component-local handlers/state).
+    renderContent(key) {
+        switch (key) {
+            case 'notice': return <StartMessageContent/>;
+            case 'resume': return <Resume/>;
+            case 'projects': return <Projects/>;
+            case 'puzzle': return <Puzzle/>;
+            case 'paint': return <Paint/>;
+            case 'solitaire': return <Solitaire/>;
+            case 'minesweeper':
+                return (
+                    <div>
+                        <button className={'button'} onClick={this.restartMinesweeper}>Restart</button>
+                        <Minesweeper key={this.state.minesweeperKey} bombChance={0.15}/>
+                    </div>
+                );
+            default: return null;
+        }
     }
 
     render() {
+        const {windows} = this.state;
+        const openKeys = WINDOW_KEYS.filter((k) => windows[k].open);
+        const taskbarItems = openKeys.map((k) => ({
+            key: k,
+            label: WINDOW_META[k].label,
+            active: !windows[k].min,
+            onClick: () => this.onTaskbarClick(k),
+        }));
+
         return (
             <div className="App">
                 {this.state.loading_screen ? <img id={'loading_screen'} src={loading} alt={'loading...'}/> :
                     <div>
-                        <Icons onClickMinesweeper={this.onClickMinesweeper}
-                               onClickSolitaire={this.onClickSolitaire}
-                               onClickPuzzle={this.onClickPuzzle}
-                               onClickResume={this.onClickResume}
-                               onClickPaint={this.onClickPaint}/>
+                        <Icons onClickMinesweeper={() => this.openWindow('minesweeper')}
+                               onClickSolitaire={() => this.openWindow('solitaire')}
+                               onClickPuzzle={() => this.openWindow('puzzle')}
+                               onClickResume={() => this.openWindow('resume')}
+                               onClickPaint={() => this.openWindow('paint')}/>
 
-                        {this.state.startMessage ? <Window title={'Notice'}
-                                                           id={'start_message'}
-                                                           children={<StartMessageContent/>}
-                                                           showClose={true}
-                                                           onClose={this.onClickStartMessage}/> : null}
+                        {openKeys.map((key) => (
+                            <XPWindow key={key}
+                                      title={WINDOW_META[key].title}
+                                      id={WINDOW_META[key].id}
+                                      rect={WINDOW_META[key].rect}
+                                      z={windows[key].z}
+                                      minimized={windows[key].min}
+                                      onClose={() => this.closeWindow(key)}
+                                      onMinimize={() => this.minimizeWindow(key)}
+                                      onFocus={() => this.focusWindow(key)}
+                                      children={this.renderContent(key)}/>
+                        ))}
 
-                        {this.state.isFocusResume ? <Window title={'Resume'}
-                                                            id={'resume_window'}
-                                                            children={<Resume/>}
-                                                            showClose={true}
-                                                            onClose={this.onClickResume}/> : null}
-
-                        {this.state.isFocusPuzzle ? <Window title={'Puzzle'}
-                                                            id={'puzzle'}
-                                                            children={<Puzzle/>}
-                                                            showClose={true}
-                                                            onClose={this.onClickPuzzle}/> : null}
-
-                        {this.state.isFocusPaint ? <Window title={'Paint'}
-                                                           children={<Paint/>}
-                                                           showClose={true}
-                                                           onClose={this.onClickPaint}/> : null}
-
-                        {this.state.isFocusSolitaire ? <Window title={'Spider Solitaire'}
-                                                               children={<Solitaire/>}
-                                                               showClose={true}
-                                                               onClose={this.onClickSolitaire}/> : null}
-
-                        {this.state.isFocusMinesweeper ? <Window title={'Minesweeper'}
-                                                                 id={'minesweeper_window'}
-                                                                 children={<div>
-                                                                     <button className={'button'}
-                                                                         onClick={this.onClickRestartMinesweeper}>Restart
-                                                                     </button>
-                                                                     <Minesweeper bombChance={0.15} />
-                                                                 </div>}
-                                                                 showClose={true}
-                                                                 onClose={this.onClickMinesweeper}/> : null}
-
-                        {this.state.isFocusProjects ? <Window title={'My Projects'}
-                                                              id={'projects_window'}
-                                                              children={<Projects/>}
-                                                              showClose={true}
-                                                              onClose={this.onClickProjects}/> : null}
-
-                        {this.state.startMenu ? <StartMenu onAbout={this.onOpenAbout}
-                                                           onResume={this.onOpenResume}
-                                                           onProjects={this.onOpenProjects}
+                        {this.state.startMenu ? <StartMenu onAbout={() => this.openWindow('notice')}
+                                                           onResume={() => this.openWindow('resume')}
+                                                           onProjects={() => this.openWindow('projects')}
                                                            onClose={this.onCloseStartMenu}/> : null}
 
                         <div id={'start_bar'}>
                             <img id={'start_button'} src={start} onClick={this.onClickStartMenu} alt={'start_logo'}/>
-                            <Taskbar items={this.openWindows()}/>
+                            <Taskbar items={taskbarItems}/>
                         </div>
                     </div>}
             </div>
