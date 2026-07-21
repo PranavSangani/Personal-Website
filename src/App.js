@@ -9,6 +9,8 @@ import Icons from "./Icons";
 import StartMessageContent from "./StartMessage";
 import Puzzle from "./Puzzle";
 import Resume from "./Resume";
+import StartMenu from "./StartMenu";
+import Projects from "./Projects";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
 
@@ -52,6 +54,25 @@ class App extends React.Component {
             startMessage: !this.state.startMessage
         })
     }
+    onClickStartMenu = () => {
+        this.setState({
+            startMenu: !this.state.startMenu
+        })
+    }
+    onCloseStartMenu = () => {
+        this.setState({
+            startMenu: false
+        })
+    }
+    onClickProjects = () => {
+        this.setState({
+            isFocusProjects: !this.state.isFocusProjects
+        })
+    }
+    // Openers used by the Start Menu (always open, never toggle-closed).
+    onOpenAbout = () => this.setState({startMessage: true})
+    onOpenResume = () => this.setState({isFocusResume: true})
+    onOpenProjects = () => this.setState({isFocusProjects: true})
 
     state = {
         isFocusMinesweeper: false,
@@ -59,7 +80,9 @@ class App extends React.Component {
         isFocusPuzzle: false,
         isFocusResume: false,
         isFocusPaint: false,
+        isFocusProjects: false,
         startMessage: true,
+        startMenu: false,
         loading_screen: true
     };
 
@@ -120,8 +143,20 @@ class App extends React.Component {
                                                                  </div>}
                                                                  showClose={true}
                                                                  onClose={this.onClickMinesweeper}/> : null}
+
+                        {this.state.isFocusProjects ? <Window title={'My Projects'}
+                                                              id={'projects_window'}
+                                                              children={<Projects/>}
+                                                              showClose={true}
+                                                              onClose={this.onClickProjects}/> : null}
+
+                        {this.state.startMenu ? <StartMenu onAbout={this.onOpenAbout}
+                                                           onResume={this.onOpenResume}
+                                                           onProjects={this.onOpenProjects}
+                                                           onClose={this.onCloseStartMenu}/> : null}
+
                         <div id={'start_bar'}>
-                            <img src={start} onClick={this.onClickStartMessage} alt={'start_logo'}/>
+                            <img src={start} onClick={this.onClickStartMenu} alt={'start_logo'}/>
                         </div>
                     </div>}
             </div>
