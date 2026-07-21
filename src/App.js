@@ -18,7 +18,7 @@ import start from './assets/start.png';
 // Per-window metadata: taskbar label, title-bar text, DOM id, and the default
 // position/size used the first time the window opens.
 const WINDOW_META = {
-    notice:      {label: 'Notice',           title: 'Notice',           id: 'start_message',      rect: {x: 300, y: 90,  width: 720, height: 520}},
+    notice:      {label: 'Notice',           title: 'Notice',           id: 'start_message',      rect: {center: true, width: 0.66, height: 0.74}},
     resume:      {label: 'Resume',           title: 'Resume',           id: 'resume_window',      rect: {x: 210, y: 40,  width: 520, height: 640}},
     projects:    {label: 'My Projects',      title: 'My Projects',      id: 'projects_window',    rect: {x: 350, y: 120, width: 780, height: 470}},
     puzzle:      {label: 'Puzzle',           title: 'Puzzle',           id: 'puzzle',             rect: {x: 260, y: 70,  width: 720, height: 560}},

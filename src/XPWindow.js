@@ -5,6 +5,24 @@ import {Window} from 'react-windows-xp';
 const TASKBAR_HEIGHT = 34;
 const DOUBLE_CLICK_MS = 500;
 
+// Resolve a window's default rect into an actual {pos, size}. Width/height may
+// be given as fractions (<= 1) of the available viewport so windows scale with
+// the responsive (vw-based) font sizes. `center: true` centers the window;
+// otherwise x/y are used. Everything is clamped to stay on-screen.
+function initialGeometry(rect) {
+    const availW = window.innerWidth;
+    const availH = window.innerHeight - TASKBAR_HEIGHT;
+    let width = rect.width <= 1 ? rect.width * availW : rect.width;
+    let height = rect.height <= 1 ? rect.height * availH : rect.height;
+    width = Math.min(Math.round(width), availW - 16);
+    height = Math.min(Math.round(height), availH - 16);
+    let x = rect.center ? (availW - width) / 2 : rect.x;
+    let y = rect.center ? (availH - height) / 2 : rect.y;
+    x = Math.max(0, Math.min(x, availW - width));
+    y = Math.max(0, Math.min(y, availH - height));
+    return {pos: {x: Math.round(x), y: Math.round(y)}, size: {width, height}};
+}
+
 // A draggable + resizable + minimizable + maximizable XP window.
 // - Drag by the title bar (dragHandleClassName="title-bar").
 // - Native XP minimize button (showMinimize) calls onMinimize; when minimized
@@ -14,8 +32,8 @@ const DOUBLE_CLICK_MS = 500;
 // - Geometry is controlled here so maximize can snap out and restore.
 // - Clicking anywhere on the window raises it via onFocus (z-index bump).
 function XPWindow({title, id, rect, z, minimized, onClose, onMinimize, onFocus, children}) {
-    const [pos, setPos] = useState({x: rect.x, y: rect.y});
-    const [size, setSize] = useState({width: rect.width, height: rect.height});
+    const [pos, setPos] = useState(() => initialGeometry(rect).pos);
+    const [size, setSize] = useState(() => initialGeometry(rect).size);
     const [maximized, setMaximized] = useState(false);
     const [prev, setPrev] = useState(null); // saved floating geometry while maximized
 
