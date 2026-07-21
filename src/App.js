@@ -11,6 +11,7 @@ import Puzzle from "./Puzzle";
 import Resume from "./Resume";
 import StartMenu from "./StartMenu";
 import Projects from "./Projects";
+import Taskbar from "./Taskbar";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
 
@@ -92,6 +93,33 @@ class App extends React.Component {
                 loading_screen: false
             })
         }, 3500);
+        document.addEventListener('mousedown', this.handleDocumentClick);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleDocumentClick);
+    }
+
+    // Close the Start Menu when clicking anywhere outside it. Clicks on the
+    // start bar are ignored here so the Start button's own handler can toggle.
+    handleDocumentClick = (e) => {
+        if (!this.state.startMenu) return;
+        if (e.target.closest('.start_menu') || e.target.closest('#start_bar')) return;
+        this.setState({startMenu: false});
+    }
+
+    // The set of windows currently open, in taskbar order.
+    openWindows() {
+        const all = [
+            {key: 'notice', label: 'Notice', open: this.state.startMessage, onClick: this.onClickStartMessage},
+            {key: 'resume', label: 'Resume', open: this.state.isFocusResume, onClick: this.onClickResume},
+            {key: 'projects', label: 'My Projects', open: this.state.isFocusProjects, onClick: this.onClickProjects},
+            {key: 'puzzle', label: 'Puzzle', open: this.state.isFocusPuzzle, onClick: this.onClickPuzzle},
+            {key: 'paint', label: 'Paint', open: this.state.isFocusPaint, onClick: this.onClickPaint},
+            {key: 'solitaire', label: 'Spider Solitaire', open: this.state.isFocusSolitaire, onClick: this.onClickSolitaire},
+            {key: 'minesweeper', label: 'Minesweeper', open: this.state.isFocusMinesweeper, onClick: this.onClickMinesweeper},
+        ];
+        return all.filter((w) => w.open);
     }
 
     render() {
@@ -156,7 +184,8 @@ class App extends React.Component {
                                                            onClose={this.onCloseStartMenu}/> : null}
 
                         <div id={'start_bar'}>
-                            <img src={start} onClick={this.onClickStartMenu} alt={'start_logo'}/>
+                            <img id={'start_button'} src={start} onClick={this.onClickStartMenu} alt={'start_logo'}/>
+                            <Taskbar items={this.openWindows()}/>
                         </div>
                     </div>}
             </div>
