@@ -12,11 +12,11 @@ import sorting_icon from "./assets/sorting_icon.png";
 
 // One desktop shortcut: a fixed-width tile with the icon centered above its label,
 // so every icon lines up in the same column. Links open in a new tab; apps open a window.
-function DesktopIcon({icon, label, onClick, href, newTab = true}) {
+function DesktopIcon({icon, label, display, onClick, href, newTab = true}) {
     const content = (
         <>
             <img src={icon} alt={''} width={32} height={32}/>
-            <p>{label}</p>
+            <p>{display || label}</p>
         </>
     );
     if (href) {
@@ -42,7 +42,7 @@ function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzl
             <DesktopIcon icon={calculator_icon} label={'Puzzles'} onClick={onClickPuzzle}/>
             <DesktopIcon icon={paint_icon} label={'Paint'} onClick={onClickPaint}/>
             <DesktopIcon icon={solitaire_icon} label={'Spider Solitaire'} onClick={onClickSolitaire}/>
-            <DesktopIcon icon={minesweeper_icon} label={'Minesweeper'} onClick={onClickMinesweeper}/>
+            <DesktopIcon icon={minesweeper_icon} label={'Minesweeper'} display={<>Mine<br/>sweeper</>} onClick={onClickMinesweeper}/>
         </div>
     );
 }
