@@ -15,7 +15,7 @@ import sorting_icon from "./assets/sorting_icon.png";
 function DesktopIcon({icon, label, onClick, href, newTab = true}) {
     const content = (
         <>
-            <img src={icon} alt={''} width={32} height={32}/>
+            <img src={icon} alt={''} width={44} height={44}/>
             <p>{label}</p>
         </>
     );
