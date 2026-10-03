@@ -27,16 +27,16 @@ const PROJECTS = [
     {
         name: 'Sorting Algorithm Visualizer',
         icon: sorting_icon,
-        description: 'Interactive visualizations of classic sorting algorithms.',
-        tech: 'JavaScript',
+        description: 'Interactive React app that animates merge, quick, insertion, and bubble sort in real time.',
+        tech: 'React, JavaScript, HTML, CSS',
         live: 'https://pranavsangani.github.io/SortingAlgorithmVisualizer/',
         source: 'https://github.com/PranavSangani/SortingAlgorithmVisualizer',
     },
     {
         name: 'All-Pro NFL Predictor',
         icon: ie_icon,
-        description: 'Predicts NFL All-Pro selections using lasso regression, random forest, and neural network models trained on scraped Pro Football Reference data.',
-        tech: 'Python, machine learning, web scraping',
+        description: 'Predicts NFL All-Pro selections in R using lasso regression, random forest, and neural network models, trained on player statistics scraped from Pro Football Reference with Python.',
+        tech: 'R (RStudio), Python, machine learning',
     },
     {
         name: 'DEEPSEAS',
