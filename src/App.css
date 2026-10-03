@@ -53,18 +53,60 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    /* wrap into a second column (like XP) when the screen is too short */
+    flex-wrap: wrap;
+    align-content: flex-start;
+    max-height: calc(100vh - 50px);
     font-weight: bold;
 }
 
+/* Desktop shortcut tile: same width for every icon so they share one centered column. */
 .icon {
-    padding-top: .5%;
+    width: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    display: block;
+    padding: 4px 0;
+    margin: 0 6px 8px 0;
     background-color: transparent;
     border: 1px solid transparent;
-    margin-right: 10px;
-    margin-bottom: 1px;
-    float: left;
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* The XP theme styles every <button>; desktop icons should look like plain shortcuts. */
+.icon_containers button.icon,
+.icon_containers button.icon:hover,
+.icon_containers button.icon:active,
+.icon_containers button.icon:focus,
+.icon_containers button.icon:not(:disabled):hover,
+.icon_containers button.icon:not(:disabled):active {
+    background: transparent;
+    box-shadow: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    min-width: 0;
+    min-height: 0;
+    padding: 4px 0;
+    outline: none;
+}
+
+.icon img {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.icon p {
+    margin: 4px 0 0 0;
+    line-height: 1.15;
+    /* XP-style desktop label: white with a drop shadow, readable on sky and grass */
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.6);
+    overflow-wrap: break-word;
 }
 
 /* Center the board within its window instead of the whole viewport. */

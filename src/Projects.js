@@ -1,8 +1,21 @@
 import React from 'react';
 import ie_icon from "./assets/ie.png";
+import sorting_icon from "./assets/sorting_icon.png";
 
 // Add/edit your projects here. `live` and `source` are optional (omit to hide the link).
 const PROJECTS = [
+    {
+        name: 'FDA & EU Drug Data Search (Axcellion)',
+        icon: ie_icon,
+        description: 'End-to-end RAG pipeline and federated search API over 80K+ pages of FDA and EU drug documents, with a Neo4j knowledge graph and hybrid retrieval.',
+        tech: 'Python, AWS (S3, EC2), Neo4j, RAG',
+    },
+    {
+        name: 'SHERPA (Aavalar Consulting)',
+        icon: ie_icon,
+        description: 'AI assistant that answers employee questions from company documents with citations, with permission-aware search and Microsoft Teams and SharePoint integration.',
+        tech: 'Python, Claude Agent SDK, MCP, PostgreSQL',
+    },
     {
         name: 'XP Portfolio',
         icon: ie_icon,
@@ -13,13 +26,24 @@ const PROJECTS = [
     },
     {
         name: 'Sorting Algorithm Visualizer',
-        icon: ie_icon,
+        icon: sorting_icon,
         description: 'Interactive visualizations of classic sorting algorithms.',
         tech: 'JavaScript',
         live: 'https://pranavsangani.github.io/SortingAlgorithmVisualizer/',
         source: 'https://github.com/PranavSangani/SortingAlgorithmVisualizer',
     },
-    // TODO: add more projects here as folders
+    {
+        name: 'All-Pro NFL Predictor',
+        icon: ie_icon,
+        description: 'Predicts NFL All-Pro selections using lasso regression, random forest, and neural network models trained on scraped Pro Football Reference data.',
+        tech: 'Python, machine learning, web scraping',
+    },
+    {
+        name: 'DEEPSEAS',
+        icon: ie_icon,
+        description: 'Patent-pending underwater buoy that detects illegal fishing in Marine Protected Areas, running AI audio and vision models on a Jetson Nano.',
+        tech: 'Python, Jetson Nano, deep learning',
+    },
 ];
 
 function Projects() {

@@ -144,6 +144,7 @@ class App extends React.Component {
                                onClickSolitaire={() => this.openWindow('solitaire')}
                                onClickPuzzle={() => this.openWindow('puzzle')}
                                onClickResume={() => this.openWindow('resume')}
+                               onClickProjects={() => this.openWindow('projects')}
                                onClickPaint={() => this.openWindow('paint')}/>
 
                         {openKeys.map((key) => (

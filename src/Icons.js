@@ -1,58 +1,48 @@
 import React from 'react';
-import notepad_icon from "./assets/notepad_icon.png";
-import ie_icon from "./assets/ie.png";
 import paint_icon from "./assets/paint_icon.png";
 import solitaire_icon from "./assets/solitaire_icon.png";
 import minesweeper_icon from "./assets/minesweeper_icon.png";
 import calculator_icon from "./assets/calculator_icon.png";
+import github_icon from "./assets/github_icon.png";
+import linkedin_icon from "./assets/linkedin_icon.png";
+import folder_icon from "./assets/folder_icon.png";
+import mail_icon from "./assets/mail_icon.png";
+import resume_icon from "./assets/resume_icon.png";
+import sorting_icon from "./assets/sorting_icon.png";
 
-function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume}) {
+// One desktop shortcut: a fixed-width tile with the icon centered above its label,
+// so every icon lines up in the same column. Links open in a new tab; apps open a window.
+function DesktopIcon({icon, label, onClick, href, newTab = true}) {
+    const content = (
+        <>
+            <img src={icon} alt={''} width={32} height={32}/>
+            <p>{label}</p>
+        </>
+    );
+    if (href) {
+        return (
+            <a className={'icon'} href={href} title={label}
+               {...(newTab ? {target: '_blank', rel: 'noreferrer'} : {})}>
+                {content}
+            </a>
+        );
+    }
+    return <button className={'icon'} onClick={onClick} title={label}>{content}</button>;
+}
+
+function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume, onClickProjects}) {
     return (
         <div className={'icon_containers'}>
-            <div className={'icon'}>
-                <span>&nbsp;&nbsp;</span>
-                <img src={notepad_icon} alt="Resume" onClick={onClickResume}/>
-                <p><span>&nbsp;&nbsp;</span>Resume</p>
-            </div>
-            <div className={'icon'}>
-                <span>&nbsp;&nbsp;</span>
-                <a href={'https://github.com/pranav-sangani'}
-                   target={'_blank'}
-                   rel="noreferrer">
-                    <img src={ie_icon} alt="Github"/></a>
-                <p><span>&nbsp;&nbsp;</span>GitHub</p>
-            </div>                      
-            <div className={'icon'}>
-                <a href={'https://www.linkedin.com/in/pranav-sangani-533415229/'}
-                   target={'_blank'}
-                   rel="noreferrer">
-                    <img src={ie_icon} alt="Linkedin Icon"/></a>
-                <p>Linkedin</p>
-            </div>
-            <div className={'icon'} style={{ marginLeft: '-10px' }}>
-                <a href={'https://pranavsangani.github.io/SortingAlgorithmVisualizer/'}
-                   target={'_blank'}
-                   rel="noreferrer">
-                    <img src={ie_icon} alt="Sorting Algorithm Visualizer"/></a>
-                <p>SortingAlgo <br/> Visualizer</p>
-            </div>                 
-            <div className={'icon'}>
-                <img src={calculator_icon} alt="Puzzle Icon" onClick={onClickPuzzle}/>
-                <p>Puzzles</p>
-            </div>
-            <div className={'icon'}>
-                <span>&nbsp;&nbsp;</span>
-                <img src={paint_icon} alt="Paint Icon" onClick={onClickPaint}/>
-                <p><span>&nbsp;&nbsp;</span>Paint</p>
-            </div>
-            <div className={'icon'}>
-                <img src={solitaire_icon} alt="Solitaire Icon" onClick={onClickSolitaire}/>
-                <p>Spider <br/> Solitaire</p>
-            </div>
-            <div className={'icon'}>
-                <img src={minesweeper_icon} alt="Minesweeper Icon" onClick={onClickMinesweeper}/>
-                <p>Mine<br/>sweeper</p>
-            </div>
+            <DesktopIcon icon={resume_icon} label={'Resume'} onClick={onClickResume}/>
+            <DesktopIcon icon={folder_icon} label={'My Projects'} onClick={onClickProjects}/>
+            <DesktopIcon icon={github_icon} label={'GitHub'} href={'https://github.com/PranavSangani'}/>
+            <DesktopIcon icon={linkedin_icon} label={'LinkedIn'} href={'https://www.linkedin.com/in/pranavsangani/'}/>
+            <DesktopIcon icon={mail_icon} label={'Email'} href={'mailto:pranavsai.sangani@gmail.com'} newTab={false}/>
+            <DesktopIcon icon={sorting_icon} label={'Sorting Visualizer'} href={'https://pranavsangani.github.io/SortingAlgorithmVisualizer/'}/>
+            <DesktopIcon icon={calculator_icon} label={'Puzzles'} onClick={onClickPuzzle}/>
+            <DesktopIcon icon={paint_icon} label={'Paint'} onClick={onClickPaint}/>
+            <DesktopIcon icon={solitaire_icon} label={'Spider Solitaire'} onClick={onClickSolitaire}/>
+            <DesktopIcon icon={minesweeper_icon} label={'Minesweeper'} onClick={onClickMinesweeper}/>
         </div>
     );
 }

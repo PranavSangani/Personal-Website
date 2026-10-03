@@ -1,6 +1,9 @@
 import React from 'react';
 import notepad_icon from "./assets/notepad_icon.png";
-import ie_icon from "./assets/ie.png";
+import github_icon from "./assets/github_icon.png";
+import linkedin_icon from "./assets/linkedin_icon.png";
+import resume_icon from "./assets/resume_icon.png";
+import folder_icon from "./assets/folder_icon.png";
 
 // windows_logo.png lives in /public, so reference it via PUBLIC_URL.
 const windows_logo = process.env.PUBLIC_URL + '/windows_logo.png';
@@ -25,21 +28,21 @@ function StartMenu({onAbout, onResume, onProjects, onClose}) {
                     <img src={notepad_icon} alt={''}/> About Me
                 </button>
                 <button className={'start_menu_item'} onClick={run(onResume)}>
-                    <img src={notepad_icon} alt={''}/> Resume
+                    <img src={resume_icon} alt={''}/> Resume
                 </button>
                 <button className={'start_menu_item'} onClick={run(onProjects)}>
-                    <img src={ie_icon} alt={''}/> My Projects
+                    <img src={folder_icon} alt={''}/> My Projects
                 </button>
 
                 <hr className={'start_menu_divider'}/>
 
-                <a className={'start_menu_item'} href={'https://github.com/pranav-sangani'}
+                <a className={'start_menu_item'} href={'https://github.com/PranavSangani'}
                    target={'_blank'} rel="noreferrer" onClick={onClose}>
-                    <img src={ie_icon} alt={''}/> GitHub
+                    <img src={github_icon} alt={''}/> GitHub
                 </a>
-                <a className={'start_menu_item'} href={'https://www.linkedin.com/in/pranav-sangani-533415229/'}
+                <a className={'start_menu_item'} href={'https://www.linkedin.com/in/pranavsangani/'}
                    target={'_blank'} rel="noreferrer" onClick={onClose}>
-                    <img src={ie_icon} alt={''}/> LinkedIn
+                    <img src={linkedin_icon} alt={''}/> LinkedIn
                 </a>
             </div>
 
