@@ -366,3 +366,8 @@ li {
     display: flex;
     gap: 12px;
 }
+
+/* Live/Source links: between the description and the project title in size */
+.project_links a {
+    font-size: calc(10px + .5vw);
+}
