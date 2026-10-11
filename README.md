@@ -1,15 +1,18 @@
 # Visit the website at https://pranavsangani.info
 
 # About
-I created this website with React to mimic the first operating system that I ever used - Windows XP. There are links to
-my resume, GitHub, LinkedIn, one of my favorite puzzles, classic MS Paint, Spider Solitaire, and Minesweeper(
-both of which I have spent hours on hours playing as a child). Building this website was a ton of fun and made me very
-nostalgic - hope you enjoy it as much as I do!
+I created this website with React to mimic Windows XP, which, in my completely unbiased opinion, is the most nostalgic
+operating system ever made. There are links to my resume, projects, GitHub, LinkedIn, and email, along with one of my
+favorite puzzles, classic MS Paint, Spider Solitaire, and Minesweeper (both of which I have spent hours on hours playing
+as a child). Building this website was a ton of fun and made me very nostalgic - hope you enjoy it as much as I do!
 
-![Personal Website Preview](docs/preview.PNG)
-![Paint Preview](docs/paint_readme.PNG)
-![Minesweeper Preview](docs/minesweeper_readme.PNG)
-![Spider Solitaire Preview](docs/spider_readme.PNG)
+![Personal Website Preview](docs/preview.jpg)
+![Resume Preview](docs/resume.jpg)
+![Projects Preview](docs/projects.jpg)
+![Puzzle Preview](docs/puzzle.jpg)
+![Paint Preview](docs/paint.jpg)
+![Minesweeper Preview](docs/minesweeper.jpg)
+![Spider Solitaire Preview](docs/spider.jpg)
 
 # Credits
 For both Spider and Paint, I am using an iframe component that goes to their
