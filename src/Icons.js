@@ -72,12 +72,12 @@ function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzl
         {id: 'coursework', icon: notepad_icon, label: 'Coursework', onClick: onClickCoursework},
         {id: 'github', icon: github_icon, label: 'GitHub', href: LINKS.github},
         {id: 'linkedin', icon: linkedin_icon, label: 'LinkedIn', href: LINKS.linkedin},
-        {id: 'email', icon: mail_icon, label: 'Email', href: LINKS.email, newTab: false},
         {id: 'sorting', icon: sorting_icon, label: 'Sorting Visualizer', href: LINKS.sortingVisualizer},
+        {id: 'minesweeper', icon: minesweeper_icon, label: 'Minesweeper', onClick: onClickMinesweeper},
         {id: 'puzzle', icon: calculator_icon, label: 'Puzzles', onClick: onClickPuzzle},
         {id: 'paint', icon: paint_icon, label: 'Paint', onClick: onClickPaint},
         {id: 'solitaire', icon: solitaire_icon, label: 'Spider Solitaire', onClick: onClickSolitaire},
-        {id: 'minesweeper', icon: minesweeper_icon, label: 'Minesweeper', onClick: onClickMinesweeper},
+        {id: 'email', icon: mail_icon, label: 'Email', href: LINKS.email, newTab: false},
     ];
 
     // Positions of icons the user has moved; the rest sit on the default grid.
