@@ -11,6 +11,68 @@
     height: 100%;
 }
 
+#loading_plain_link {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    color: #c9d6ff;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+/* ---------- Welcome window header ---------- */
+.notice_name {
+    margin-bottom: 0;
+}
+
+.notice_tagline {
+    margin: 6px 0 4px;
+}
+
+.notice_seeking {
+    margin: 0 0 14px;
+    font-size: calc(10px + .45vw);
+    font-style: italic;
+}
+
+.notice_actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 8px;
+}
+
+/* XP-style push button, shared by real buttons and links. */
+.notice_btn,
+button.notice_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 96px;
+    padding: 6px 14px;
+    border: 1px solid #003c74;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #fff 0%, #ecebe6 86%, #d6d0c5 100%);
+    color: #000;
+    /* Arial to match the rest of the window (Tahoma's capital I has serifs). */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(11px + .3vw);
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.notice_btn:hover {
+    box-shadow: inset -1px 1px #fff0cf, inset 1px 2px #fdd889, inset -2px 2px #fbc761, inset 2px -2px #e5a01a;
+}
+
+.notice_plain {
+    margin: 10px 0 0;
+    font-size: calc(10px + .35vw);
+}
+
 h2 {
     font-size: calc(16px + 1.4vw) !important;
 }
@@ -47,34 +109,35 @@ h3 {
     overflow: auto;
 }
 
+/* The desktop: a full-screen layer under the windows. Icons are absolutely
+   positioned (default grid computed in Icons.js, or wherever they're dragged). */
 .icon_containers {
-    padding-top: 1%;
-    padding-left: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    /* wrap into a second column (like XP) when the screen is too short */
-    flex-wrap: wrap;
-    align-content: flex-start;
-    max-height: calc(100vh - 50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 34px;
     font-weight: bold;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 /* Desktop shortcut tile: same width for every icon so they share one centered column. */
 .icon {
+    position: absolute;
     width: 84px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     padding: 4px 0;
-    margin: 0 6px 8px 0;
     background-color: transparent;
     border: 1px solid transparent;
     color: inherit;
     font: inherit;
     text-decoration: none;
     cursor: pointer;
+    -webkit-user-drag: none;
 }
 
 /* The XP theme styles every <button>; desktop icons should look like plain shortcuts. */
@@ -94,6 +157,11 @@ h3 {
     outline: none;
 }
 
+.icon_img {
+    position: relative;
+    display: block;
+}
+
 .icon img {
     width: 44px;
     height: 44px;
@@ -102,11 +170,35 @@ h3 {
 
 .icon p {
     margin: 4px 0 0 0;
+    padding: 0 2px;
     line-height: 1.15;
     /* XP-style desktop label: white with a drop shadow, readable on sky and grass */
     color: #fff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.9), 0 0 3px rgba(0, 0, 0, 0.6);
     overflow-wrap: break-word;
+}
+
+/* Selected icon, as in XP: blue tint over the picture, label on a blue highlight. */
+.icon_selected .icon_img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 97, 255, 0.45);
+    -webkit-mask: var(--icon-url) center / contain no-repeat;
+    mask: var(--icon-url) center / contain no-repeat;
+}
+
+.icon_selected p {
+    background: #0b61ff;
+    text-shadow: none;
+}
+
+/* Rubber-band selection box drawn while dragging on empty desktop. */
+.selection_box {
+    position: absolute;
+    border: 1px solid #0b61ff;
+    background: rgba(11, 97, 255, 0.2);
+    pointer-events: none;
 }
 
 /* Center the board within its window instead of the whole viewport. */
@@ -367,7 +459,7 @@ li {
     gap: 12px;
 }
 
-/* Live/Source links: between the description and the project title in size */
+/* Live/Source links: a little larger than the description, smaller than the title */
 .project_links a {
-    font-size: calc(10px + .5vw);
+    font-size: calc(9px + .42vw);
 }

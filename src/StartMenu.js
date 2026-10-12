@@ -4,6 +4,8 @@ import github_icon from "./assets/github_icon.png";
 import linkedin_icon from "./assets/linkedin_icon.png";
 import resume_icon from "./assets/resume_icon.png";
 import folder_icon from "./assets/folder_icon.png";
+import ie_icon from "./assets/ie.png";
+import {LINKS, PLAIN_VIEW_HASH} from "./content";
 
 // windows_logo.png lives in /public, so reference it via PUBLIC_URL.
 const windows_logo = process.env.PUBLIC_URL + '/windows_logo.png';
@@ -36,13 +38,19 @@ function StartMenu({onAbout, onResume, onProjects, onClose}) {
 
                 <hr className={'start_menu_divider'}/>
 
-                <a className={'start_menu_item'} href={'https://github.com/PranavSangani'}
+                <a className={'start_menu_item'} href={LINKS.github}
                    target={'_blank'} rel="noreferrer" onClick={onClose}>
                     <img src={github_icon} alt={''}/> GitHub
                 </a>
-                <a className={'start_menu_item'} href={'https://www.linkedin.com/in/pranavsangani/'}
+                <a className={'start_menu_item'} href={LINKS.linkedin}
                    target={'_blank'} rel="noreferrer" onClick={onClose}>
                     <img src={linkedin_icon} alt={''}/> LinkedIn
+                </a>
+
+                <hr className={'start_menu_divider'}/>
+
+                <a className={'start_menu_item'} href={PLAIN_VIEW_HASH} onClick={onClose}>
+                    <img src={ie_icon} alt={''}/> Plain View
                 </a>
             </div>
 

@@ -3,7 +3,7 @@ import ie_icon from "./assets/ie.png";
 import sorting_icon from "./assets/sorting_icon.png";
 
 // Add/edit your projects here. `live` and `source` are optional (omit to hide the link).
-const PROJECTS = [
+export const PROJECTS = [
     {
         name: 'FDA & EU Drug Data Search (Axcellion)',
         icon: ie_icon,

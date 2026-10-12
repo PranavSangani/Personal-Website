@@ -12,13 +12,15 @@ import StartMenu from "./StartMenu";
 import Projects from "./Projects";
 import Taskbar from "./Taskbar";
 import XPWindow from "./XPWindow";
+import PlainView from "./PlainView";
+import {PLAIN_VIEW_HASH} from "./content";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
 
 // Per-window metadata: taskbar label, title-bar text, DOM id, and the default
 // position/size used the first time the window opens.
 const WINDOW_META = {
-    notice:      {label: 'Notice',           title: 'Notice',           id: 'start_message',      rect: {center: true, width: 0.66, height: 0.74}},
+    notice:      {label: 'Welcome',          title: 'Welcome',           id: 'start_message',      rect: {center: true, width: 0.66, height: 0.74}},
     resume:      {label: 'Resume',           title: 'Resume',           id: 'resume_window',      rect: {x: 210, y: 40,  width: 520, height: 640}},
     projects:    {label: 'My Projects',      title: 'My Projects',      id: 'projects_window',    rect: {x: 350, y: 120, width: 780, height: 470}},
     puzzle:      {label: 'Puzzle',           title: 'Puzzle',           id: 'puzzle',             rect: {x: 260, y: 70,  width: 720, height: 560}},
@@ -45,16 +47,25 @@ class App extends React.Component {
         minesweeperKey: 0,
         startMenu: false,
         loading_screen: true,
+        plain: window.location.hash === PLAIN_VIEW_HASH,
     };
 
     componentDidMount() {
         setTimeout(() => this.setState({loading_screen: false}), 3500);
         document.addEventListener('mousedown', this.handleDocumentClick);
+        window.addEventListener('hashchange', this.onHashChange);
     }
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleDocumentClick);
+        window.removeEventListener('hashchange', this.onHashChange);
     }
+
+    // Switch between the XP desktop and the plain view when the URL hash changes.
+    onHashChange = () => {
+        this.setState({plain: window.location.hash === PLAIN_VIEW_HASH});
+        window.scrollTo(0, 0);
+    };
 
     // Close the Start Menu on any click outside it (start bar clicks are handled
     // by the Start button's own toggle, so ignore those here).
@@ -109,7 +120,9 @@ class App extends React.Component {
     // Body content for each window (some need component-local handlers/state).
     renderContent(key) {
         switch (key) {
-            case 'notice': return <StartMessageContent/>;
+            case 'notice':
+                return <StartMessageContent onOpenResume={() => this.openWindow('resume')}
+                                            onOpenProjects={() => this.openWindow('projects')}/>;
             case 'resume': return <Resume/>;
             case 'projects': return <Projects/>;
             case 'puzzle': return <Puzzle/>;
@@ -127,6 +140,8 @@ class App extends React.Component {
     }
 
     render() {
+        if (this.state.plain) return <PlainView/>;
+
         const {windows} = this.state;
         const openKeys = WINDOW_KEYS.filter((k) => windows[k].open);
         const taskbarItems = openKeys.map((k) => ({
@@ -138,7 +153,12 @@ class App extends React.Component {
 
         return (
             <div className="App">
-                {this.state.loading_screen ? <img id={'loading_screen'} src={loading} alt={'loading...'}/> :
+                {this.state.loading_screen ? (
+                    <>
+                        <img id={'loading_screen'} src={loading} alt={'loading...'}/>
+                        <a id={'loading_plain_link'} href={PLAIN_VIEW_HASH}>Skip to the plain view</a>
+                    </>
+                ) :
                     <div>
                         <Icons onClickMinesweeper={() => this.openWindow('minesweeper')}
                                onClickSolitaire={() => this.openWindow('solitaire')}
