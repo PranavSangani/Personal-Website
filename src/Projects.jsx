@@ -58,7 +58,7 @@ function Projects() {
                         <h3 className={'project_name'}>{p.name}</h3>
                         <p className={'project_desc'}>{p.description}</p>
                         {p.results ? <p className={'project_tech'}><b>Results:</b> {p.results}</p> : null}
-                        <p className={'project_tech'}><b>Tech:</b> {p.tech}</p>
+                        <p className={'project_tech'}><b>Built with:</b> {p.tech}</p>
                         <div className={'project_links'}>
                             {p.live ? (
                                 <a href={p.live} target={'_blank'} rel="noreferrer">Live</a>
