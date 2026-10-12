@@ -32,6 +32,7 @@ export const COURSEWORK = [
     {
         name: 'Data Structures and Algorithms',
         code: 'CS 25100',
+        inProgress: true,
         summary: 'Designing efficient programs: picking the right data structure for the job and proving how fast it runs.',
         topics: 'Big-O analysis, hash tables, trees and heaps, graph algorithms (BFS/DFS, shortest paths, minimum spanning trees), sorting and searching',
     },
@@ -78,6 +79,7 @@ export const COURSEWORK = [
 export const ENTREPRENEURSHIP = {
     name: 'Certificate in Entrepreneurship and Innovation',
     code: 'ENTR',
+    inProgress: true,
     courses: 'Introduction to Entrepreneurship and Innovation (ENTR 20000) · Marketing and Management for New Ventures (ENTR 31000) · Internship and Career Preparation Seminar (ENTR 46000)',
     summary: 'Taking an idea from problem to product: finding real customer needs, testing ideas quickly, and building a business around them.',
     topics: 'Customer discovery and idea validation, business models, marketing and go-to-market, managing early-stage ventures, professional development',

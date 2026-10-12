@@ -25,6 +25,7 @@ function Coursework() {
                 <div className={'project_info'}>
                     <h3 className={'project_name'}>
                         {ENTREPRENEURSHIP.name} <span className={'course_code'}>{ENTREPRENEURSHIP.code}</span>
+                        {ENTREPRENEURSHIP.inProgress ? <span className={'course_status'}>In progress</span> : null}
                     </h3>
                     <p className={'project_desc'}>{ENTREPRENEURSHIP.summary}</p>
                     <p className={'project_tech'}><b>Courses:</b> {ENTREPRENEURSHIP.courses}</p>

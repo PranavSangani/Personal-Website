@@ -59,7 +59,10 @@ function PlainView() {
                         </article>
                     ))}
                     <article className={'plain_course'}>
-                        <h3>{ENTREPRENEURSHIP.name} <span className={'plain_code'}>{ENTREPRENEURSHIP.code}</span></h3>
+                        <h3>
+                            {ENTREPRENEURSHIP.name} <span className={'plain_code'}>{ENTREPRENEURSHIP.code}</span>
+                            {ENTREPRENEURSHIP.inProgress ? <span className={'plain_status'}>In progress</span> : null}
+                        </h3>
                         <p>{ENTREPRENEURSHIP.summary}</p>
                         <p className={'plain_tech'}>{ENTREPRENEURSHIP.courses}</p>
                     </article>
