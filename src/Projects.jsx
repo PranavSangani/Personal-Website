@@ -22,7 +22,7 @@ export const PROJECTS = [
         name: 'XP Portfolio',
         icon: ie_icon,
         description: 'This very website — a Windows XP desktop rebuilt in React.',
-        tech: 'React, CRA, GitHub Pages',
+        tech: 'React, Vite, GitHub Actions (CI/CD), GitHub Pages, Cloudflare',
         live: 'https://pranavsangani.online',
         source: 'https://github.com/PranavSangani/Personal-Website',
     },
