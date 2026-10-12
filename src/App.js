@@ -36,7 +36,7 @@ const WINDOW_META = {
 const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
 
 // How long the XP boot screen shows before the desktop.
-const LOADING_SCREEN_MS = 1200;
+const LOADING_SCREEN_MS = 1500;
 
 // Window state for a fresh desktop: only the welcome window open.
 const INITIAL_WINDOWS = {
@@ -62,15 +62,23 @@ class App extends React.Component {
     };
 
     componentDidMount() {
-        setTimeout(() => this.setState({loading_screen: false}), LOADING_SCREEN_MS);
+        this.startBootScreen();
         document.addEventListener('mousedown', this.handleDocumentClick);
         window.addEventListener('hashchange', this.onHashChange);
     }
 
     componentWillUnmount() {
+        clearTimeout(this.bootTimer);
         document.removeEventListener('mousedown', this.handleDocumentClick);
         window.removeEventListener('hashchange', this.onHashChange);
     }
+
+    // Show the XP boot screen, then the desktop.
+    startBootScreen = () => {
+        clearTimeout(this.bootTimer);
+        this.setState({loading_screen: true});
+        this.bootTimer = setTimeout(() => this.setState({loading_screen: false}), LOADING_SCREEN_MS);
+    };
 
     // Switch between the XP desktop and the plain view when the URL hash changes.
     onHashChange = () => {
@@ -128,15 +136,19 @@ class App extends React.Component {
     onClickStartMenu = () => this.setState((s) => ({startMenu: !s.startMenu}));
     onCloseStartMenu = () => this.setState({startMenu: false});
 
-    // Start > Log Off shows the XP Welcome screen; logging back on starts a
-    // fresh desktop (windows closed, icons back on the grid, new Minesweeper).
+    // Start > Log Off shows the XP Welcome screen; logging back on replays the
+    // boot screen, then a fresh desktop (windows closed, icons back on the
+    // grid, new Minesweeper).
     logOff = () => this.setState({startMenu: false, loggedOff: true});
-    logOn = () => this.setState((s) => ({
-        loggedOff: false,
-        windows: INITIAL_WINDOWS,
-        topZ: 1,
-        minesweeperKey: s.minesweeperKey + 1,
-    }));
+    logOn = () => {
+        this.setState((s) => ({
+            loggedOff: false,
+            windows: INITIAL_WINDOWS,
+            topZ: 1,
+            minesweeperKey: s.minesweeperKey + 1,
+        }));
+        this.startBootScreen();
+    };
 
     // Body content for each window (some need component-local handlers/state).
     renderContent(key) {
