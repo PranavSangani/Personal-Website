@@ -326,7 +326,8 @@ li {
     border-bottom: none;
     border-radius: 8px 8px 0 0;
     box-shadow: 3px 0 8px rgba(0, 0, 0, 0.4);
-    font-family: Tahoma, Geneva, sans-serif;
+    /* Arial rather than Tahoma, whose capital I has serifs (e.g. "LinkedIn"). */
+    font-family: Arial, Helvetica, sans-serif;
     z-index: 1000;
     overflow: hidden;
 }
