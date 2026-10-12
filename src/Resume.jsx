@@ -1,16 +1,19 @@
 import React from 'react';
 import resume from "./assets/Pranav_Sangani_Resume.png";
-import resume_pdf from './assets/Pranav_Sangani_Resume.pdf';
-import {Button} from 'react-windows-xp';
+import {LINKS, RESUME_FILENAME} from './content';
 
-function StartMessage() {
+// Resume window: Open shows the PDF in a new tab; Download saves it directly
+// (the `download` attribute works because the PDF is served from this site).
+function Resume() {
     return (
         <div>
-            <a href={resume_pdf} target={'_blank'} rel="noreferrer"><Button
-                className={'button'}>Download</Button></a><br/>
+            <div className={'resume_actions'}>
+                <a className={'notice_btn'} href={LINKS.resume} target={'_blank'} rel="noreferrer">Open</a>
+                <a className={'notice_btn'} href={LINKS.resume} download={RESUME_FILENAME}>Download</a>
+            </div>
             <img id={'resume'} src={resume} alt={'resume'}/>
         </div>
     );
 }
 
-export default StartMessage;
+export default Resume;

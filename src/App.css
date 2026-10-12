@@ -660,3 +660,11 @@ li {
     gap: 8px;
     margin-top: 18px;
 }
+
+/* Resume window: Open / Download buttons above the resume image. */
+.resume_actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 10px;
+}

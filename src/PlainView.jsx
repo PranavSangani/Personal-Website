@@ -1,7 +1,7 @@
 import React from 'react';
 import './PlainView.css';
 import resume_img from './assets/Pranav_Sangani_Resume.png';
-import {ABOUT, COURSEWORK, EMAIL, ENTREPRENEURSHIP, LINKS, PROFILE} from './content';
+import {ABOUT, COURSEWORK, EMAIL, ENTREPRENEURSHIP, LINKS, PROFILE, RESUME_FILENAME} from './content';
 import {PROJECTS} from './Projects';
 
 // A plain one-page version of the site for anyone who wants the essentials fast
@@ -71,6 +71,10 @@ function PlainView() {
 
                 <section>
                     <h2>Resume</h2>
+                    <p className={'plain_project_links plain_resume_links'}>
+                        <a href={LINKS.resume} target={'_blank'} rel="noreferrer">Open PDF</a>
+                        <a href={LINKS.resume} download={RESUME_FILENAME}>Download PDF</a>
+                    </p>
                     <a href={LINKS.resume} target={'_blank'} rel="noreferrer">
                         <img className={'plain_resume'} src={resume_img} alt={'Pranav Sangani resume'}/>
                     </a>

@@ -8,6 +8,9 @@ export const PROFILE = {
     seeking: 'Looking for Summer 2027 software engineering and AI internships',
 };
 
+// Name the PDF is saved under (the built file has a hash in its name).
+export const RESUME_FILENAME = 'Pranav_Sangani_Resume.pdf';
+
 export const EMAIL = 'pranavsai.sangani@gmail.com';
 
 export const LINKS = {

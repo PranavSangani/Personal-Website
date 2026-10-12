@@ -146,3 +146,7 @@
 .plain_results {
     font-weight: 600;
 }
+
+.plain_resume_links {
+    margin-bottom: 14px !important;
+}
