@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="page" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d9e4f5"/></linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e8eef9"/><stop offset="1" stop-color="#a9bddf"/></linearGradient>
+    <radialGradient id="lens" cx="0.35" cy="0.3" r="0.8"><stop offset="0" stop-color="#ffffff"/><stop offset="0.45" stop-color="#cfe6ff"/><stop offset="1" stop-color="#6ea5e8"/></radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9aa6b8"/><stop offset="1" stop-color="#3d4656"/></linearGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7a4a1c"/><stop offset="1" stop-color="#3b2208"/></linearGradient>
+  </defs>
+  <path d="M8 3h20l9 9v31H8z" fill="url(#page)" stroke="#5b6f93" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M28 3v9h9" fill="url(#fold)" stroke="#5b6f93" stroke-width="1.2" stroke-linejoin="round"/>
+  <g stroke="#8ea3c8" stroke-width="1.6" stroke-linecap="round">
+    <path d="M12 15h12M12 19h18M12 23h10M12 27h8M12 31h7"/>
+  </g>
+  <rect x="25" y="6" width="3" height="5" rx="0.6" fill="#e2483d"/>
+  <path d="M35.5 36.5l7.5 7.5" stroke="url(#handle)" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="29" cy="30" r="9" fill="url(#lens)" stroke="url(#rim)" stroke-width="2.6"/>
+  <path d="M24 26.5a6 6 0 0 1 5-3.5" stroke="#ffffff" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.9"/>
+</svg>

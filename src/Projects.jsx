@@ -1,26 +1,30 @@
 import React from 'react';
-import ie_icon from "./assets/ie.png";
+import search_icon from "./assets/project_search.svg";
+import chat_icon from "./assets/project_chat.svg";
+import xp_logo from "./assets/xp_logo.png";
 import sorting_icon from "./assets/sorting_icon.png";
+import football_icon from "./assets/project_football.svg";
+import buoy_icon from "./assets/project_buoy.svg";
 
 // Add/edit your projects here. `results`, `live` and `source` are optional (omit to hide them).
 export const PROJECTS = [
     {
         name: 'FDA & EU Drug Data Search (Axcellion)',
-        icon: ie_icon,
+        icon: search_icon,
         description: 'End-to-end RAG pipeline over 80K+ pages of FDA drug documents with a Neo4j knowledge graph and hybrid retrieval, extended to EU drug data, plus a federated search API that answers one query across both sources.',
         tech: 'Python, AWS (S3, EC2), Neo4j, RAG',
         results: '80K+ pages indexed · search accuracy up 50%+ · ~0.3 s answers with zero hallucinated answers in audit · ~30x lower cost at 99.5% accuracy',
     },
     {
         name: 'SHERPA (Aavalar Consulting)',
-        icon: ie_icon,
+        icon: chat_icon,
         description: 'AI assistant that answers employee questions from company documents with citations, with permission-aware search and Microsoft Teams and SharePoint integration.',
         tech: 'Python, Claude Agent SDK, MCP, PostgreSQL',
         results: '220+ automated tests running in CI · multi-agent evaluation pipeline measuring answer accuracy, refusals, and access control',
     },
     {
         name: 'XP Portfolio',
-        icon: ie_icon,
+        icon: xp_logo,
         description: 'This very website — a Windows XP desktop rebuilt in React.',
         tech: 'React, Vite, GitHub Actions (CI/CD), GitHub Pages, Cloudflare',
         live: 'https://pranavsangani.online',
@@ -36,13 +40,13 @@ export const PROJECTS = [
     },
     {
         name: 'All-Pro NFL Predictor',
-        icon: ie_icon,
+        icon: football_icon,
         description: 'Predicts NFL All-Pro selections in R using lasso regression, random forest, and neural network models, trained on player statistics scraped from Pro Football Reference with Python.',
         tech: 'R (RStudio), Python, machine learning',
     },
     {
         name: 'DEEPSEAS',
-        icon: ie_icon,
+        icon: buoy_icon,
         description: 'Patent-pending underwater buoy that detects illegal fishing in Marine Protected Areas, running AI audio and vision models on a Jetson Nano.',
         tech: 'Python, Jetson Nano, deep learning',
     },

@@ -1,6 +1,6 @@
 import React from 'react';
 import notepad_icon from "./assets/notepad_icon.png";
-import ie_icon from "./assets/ie.png";
+import folder_icon from "./assets/folder_icon.png";
 import paint_icon from "./assets/paint_icon.png";
 import solitaire_icon from "./assets/solitaire_icon.png";
 import minesweeper_icon from "./assets/minesweeper_icon.png";
@@ -10,7 +10,7 @@ import mail_icon from "./assets/mail_icon.png";
 const ICONS = {
     notice: notepad_icon,
     resume: notepad_icon,
-    projects: ie_icon,
+    projects: folder_icon,
     coursework: notepad_icon,
     puzzle: calculator_icon,
     paint: paint_icon,

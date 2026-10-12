@@ -40,6 +40,29 @@ const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'pa
 // How long the XP boot screen shows before the desktop.
 const LOADING_SCREEN_MS = 1500;
 
+// Direct links: pranavsangani.online/#resume etc. open the desktop with just
+// that window (after the boot screen). #plain is handled separately.
+const HASH_TO_WINDOW = {
+    '#about': 'notice',
+    '#resume': 'resume',
+    '#projects': 'projects',
+    '#coursework': 'coursework',
+    '#email': 'email',
+    '#puzzle': 'puzzle',
+    '#paint': 'paint',
+    '#solitaire': 'solitaire',
+    '#minesweeper': 'minesweeper',
+};
+
+// Windows for a fresh desktop: only `key` open (the welcome window by default).
+function windowsWithOnly(key) {
+    const windows = {};
+    for (const k of Object.keys(INITIAL_WINDOWS)) {
+        windows[k] = {open: k === key, min: false, z: k === key ? 1 : 0};
+    }
+    return windows;
+}
+
 // Window state for a fresh desktop: only the welcome window open.
 const INITIAL_WINDOWS = {
     notice:      {open: true,  min: false, z: 1},
@@ -55,7 +78,7 @@ const INITIAL_WINDOWS = {
 
 class App extends React.Component {
     state = {
-        windows: INITIAL_WINDOWS,
+        windows: windowsWithOnly(HASH_TO_WINDOW[window.location.hash] || 'notice'),
         topZ: 1,
         minesweeperKey: 0,
         startMenu: false,
@@ -84,8 +107,12 @@ class App extends React.Component {
     };
 
     // Switch between the XP desktop and the plain view when the URL hash changes.
+    // A window link (#resume etc.) followed while already on the site opens
+    // that window on top.
     onHashChange = () => {
-        this.setState({plain: window.location.hash === PLAIN_VIEW_HASH});
+        const hash = window.location.hash;
+        this.setState({plain: hash === PLAIN_VIEW_HASH});
+        if (HASH_TO_WINDOW[hash]) this.openWindow(HASH_TO_WINDOW[hash]);
         window.scrollTo(0, 0);
     };
 
