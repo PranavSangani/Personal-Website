@@ -34,6 +34,7 @@ function PlainView() {
                         <article className={'plain_project'} key={p.name}>
                             <h3>{p.name}</h3>
                             <p>{p.description}</p>
+                            {p.results ? <p className={'plain_results'}>{p.results}</p> : null}
                             <p className={'plain_tech'}>{p.tech}</p>
                             {p.live || p.source ? (
                                 <p className={'plain_project_links'}>

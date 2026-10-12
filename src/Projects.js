@@ -2,19 +2,21 @@ import React from 'react';
 import ie_icon from "./assets/ie.png";
 import sorting_icon from "./assets/sorting_icon.png";
 
-// Add/edit your projects here. `live` and `source` are optional (omit to hide the link).
+// Add/edit your projects here. `results`, `live` and `source` are optional (omit to hide them).
 export const PROJECTS = [
     {
         name: 'FDA & EU Drug Data Search (Axcellion)',
         icon: ie_icon,
         description: 'End-to-end RAG pipeline and federated search API over 80K+ pages of FDA and EU drug documents, with a Neo4j knowledge graph and hybrid retrieval.',
         tech: 'Python, AWS (S3, EC2), Neo4j, RAG',
+        results: '80K+ pages indexed · search accuracy up 50%+ · ~0.3 s answers with zero hallucinated answers in audit · ~30x lower cost at 99.5% accuracy',
     },
     {
         name: 'SHERPA (Aavalar Consulting)',
         icon: ie_icon,
         description: 'AI assistant that answers employee questions from company documents with citations, with permission-aware search and Microsoft Teams and SharePoint integration.',
         tech: 'Python, Claude Agent SDK, MCP, PostgreSQL',
+        results: '220+ automated tests running in CI · multi-agent evaluation pipeline measuring answer accuracy, refusals, and access control',
     },
     {
         name: 'XP Portfolio',
@@ -55,6 +57,7 @@ function Projects() {
                     <div className={'project_info'}>
                         <h3 className={'project_name'}>{p.name}</h3>
                         <p className={'project_desc'}>{p.description}</p>
+                        {p.results ? <p className={'project_tech'}><b>Results:</b> {p.results}</p> : null}
                         <p className={'project_tech'}><b>Tech:</b> {p.tech}</p>
                         <div className={'project_links'}>
                             {p.live ? (

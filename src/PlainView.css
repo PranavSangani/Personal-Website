@@ -142,3 +142,7 @@
     font-weight: 400;
     vertical-align: middle;
 }
+
+.plain_results {
+    font-weight: 600;
+}
