@@ -12,7 +12,7 @@ const windows_logo = process.env.PUBLIC_URL + '/windows_logo.png';
 
 // The classic green XP Start Menu. Each program item calls a handler passed in
 // from App and then closes the menu. External links are plain anchors.
-function StartMenu({onAbout, onResume, onProjects, onClose}) {
+function StartMenu({onAbout, onResume, onProjects, onCoursework, onClose}) {
     const run = (handler) => () => {
         handler();
         onClose();
@@ -34,6 +34,9 @@ function StartMenu({onAbout, onResume, onProjects, onClose}) {
                 </button>
                 <button className={'start_menu_item'} onClick={run(onProjects)}>
                     <img src={folder_icon} alt={''}/> My Projects
+                </button>
+                <button className={'start_menu_item'} onClick={run(onCoursework)}>
+                    <img src={notepad_icon} alt={''}/> Coursework
                 </button>
 
                 <hr className={'start_menu_divider'}/>

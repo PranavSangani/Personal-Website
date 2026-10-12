@@ -10,6 +10,7 @@ import Puzzle from "./Puzzle";
 import Resume from "./Resume";
 import StartMenu from "./StartMenu";
 import Projects from "./Projects";
+import Coursework from "./Coursework";
 import Taskbar from "./Taskbar";
 import XPWindow from "./XPWindow";
 import PlainView from "./PlainView";
@@ -23,6 +24,7 @@ const WINDOW_META = {
     notice:      {label: 'Welcome',          title: 'Welcome',           id: 'start_message',      rect: {center: true, width: 0.66, height: 0.74}},
     resume:      {label: 'Resume',           title: 'Resume',           id: 'resume_window',      rect: {x: 210, y: 40,  width: 520, height: 640}},
     projects:    {label: 'My Projects',      title: 'My Projects',      id: 'projects_window',    rect: {x: 350, y: 120, width: 780, height: 470}},
+    coursework:  {label: 'Coursework',       title: 'Coursework',       id: 'coursework_window',  rect: {x: 300, y: 90,  width: 780, height: 520}},
     puzzle:      {label: 'Puzzle',           title: 'Puzzle',           id: 'puzzle',             rect: {x: 260, y: 70,  width: 720, height: 560}},
     paint:       {label: 'Paint',            title: 'Paint',            id: 'paint_window',       rect: {x: 200, y: 60,  width: 900, height: 600}},
     solitaire:   {label: 'Spider Solitaire', title: 'Spider Solitaire', id: 'solitaire_window',   rect: {x: 220, y: 60,  width: 900, height: 600}},
@@ -30,7 +32,7 @@ const WINDOW_META = {
 };
 
 // Taskbar order / z-order iteration order.
-const WINDOW_KEYS = ['notice', 'resume', 'projects', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
+const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
 
 class App extends React.Component {
     state = {
@@ -38,6 +40,7 @@ class App extends React.Component {
             notice:      {open: true,  min: false, z: 1},
             resume:      {open: false, min: false, z: 0},
             projects:    {open: false, min: false, z: 0},
+            coursework:  {open: false, min: false, z: 0},
             puzzle:      {open: false, min: false, z: 0},
             paint:       {open: false, min: false, z: 0},
             solitaire:   {open: false, min: false, z: 0},
@@ -125,6 +128,7 @@ class App extends React.Component {
                                             onOpenProjects={() => this.openWindow('projects')}/>;
             case 'resume': return <Resume/>;
             case 'projects': return <Projects/>;
+            case 'coursework': return <Coursework/>;
             case 'puzzle': return <Puzzle/>;
             case 'paint': return <Paint/>;
             case 'solitaire': return <Solitaire/>;
@@ -165,6 +169,7 @@ class App extends React.Component {
                                onClickPuzzle={() => this.openWindow('puzzle')}
                                onClickResume={() => this.openWindow('resume')}
                                onClickProjects={() => this.openWindow('projects')}
+                               onClickCoursework={() => this.openWindow('coursework')}
                                onClickPaint={() => this.openWindow('paint')}/>
 
                         {openKeys.map((key) => (
@@ -183,6 +188,7 @@ class App extends React.Component {
                         {this.state.startMenu ? <StartMenu onAbout={() => this.openWindow('notice')}
                                                            onResume={() => this.openWindow('resume')}
                                                            onProjects={() => this.openWindow('projects')}
+                                                           onCoursework={() => this.openWindow('coursework')}
                                                            onClose={this.onCloseStartMenu}/> : null}
 
                         <div id={'start_bar'}>

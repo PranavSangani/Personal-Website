@@ -463,3 +463,32 @@ li {
 .project_links a {
     font-size: calc(9px + .42vw);
 }
+
+/* ---------- Coursework window ---------- */
+.coursework_heading {
+    margin: 4px 0 -4px;
+}
+
+/* Small gray course-code badge after each course name. */
+.course_code {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 1px 6px;
+    border: 1px solid #acaca0;
+    border-radius: 3px;
+    background: #ece9d8;
+    color: #555;
+    font-size: calc(8px + .3vw);
+    font-weight: normal;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.course_status {
+    margin-left: 6px;
+    color: #2e7d32;
+    font-size: calc(8px + .3vw);
+    font-style: italic;
+    font-weight: normal;
+    vertical-align: middle;
+}

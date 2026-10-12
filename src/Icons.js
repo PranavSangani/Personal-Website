@@ -9,6 +9,7 @@ import folder_icon from "./assets/folder_icon.png";
 import mail_icon from "./assets/mail_icon.png";
 import resume_icon from "./assets/resume_icon.png";
 import sorting_icon from "./assets/sorting_icon.png";
+import notepad_icon from "./assets/notepad_icon.png";
 import {LINKS} from "./content";
 
 const TASKBAR_HEIGHT = 34;
@@ -64,10 +65,11 @@ function DesktopIcon({icon, label, onClick, href, newTab = true, selected, pos, 
 // moves together), and selected with a rubber-band box by dragging on empty
 // space. Dragging and the selection box are mouse-only so touch taps behave
 // exactly like clicks.
-function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume, onClickProjects}) {
+function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume, onClickProjects, onClickCoursework}) {
     const ICONS = [
         {id: 'resume', icon: resume_icon, label: 'Resume', onClick: onClickResume},
         {id: 'projects', icon: folder_icon, label: 'My Projects', onClick: onClickProjects},
+        {id: 'coursework', icon: notepad_icon, label: 'Coursework', onClick: onClickCoursework},
         {id: 'github', icon: github_icon, label: 'GitHub', href: LINKS.github},
         {id: 'linkedin', icon: linkedin_icon, label: 'LinkedIn', href: LINKS.linkedin},
         {id: 'email', icon: mail_icon, label: 'Email', href: LINKS.email, newTab: false},

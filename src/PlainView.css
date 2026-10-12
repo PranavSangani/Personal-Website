@@ -113,3 +113,32 @@
     width: 100%;
     border: 1px solid var(--plain-border);
 }
+
+.plain_course {
+    margin-bottom: 18px;
+}
+
+.plain_course .plain_tech {
+    margin-bottom: 0;
+}
+
+.plain_code {
+    margin-left: 6px;
+    padding: 1px 7px;
+    border: 1px solid var(--plain-border);
+    border-radius: 4px;
+    color: var(--plain-muted);
+    font-size: 13px;
+    font-weight: 500;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.plain_status {
+    margin-left: 8px;
+    color: var(--plain-muted);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 400;
+    vertical-align: middle;
+}

@@ -10,6 +10,7 @@ const ICONS = {
     notice: notepad_icon,
     resume: notepad_icon,
     projects: ie_icon,
+    coursework: notepad_icon,
     puzzle: calculator_icon,
     paint: paint_icon,
     solitaire: solitaire_icon,

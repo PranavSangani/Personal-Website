@@ -1,7 +1,7 @@
 import React from 'react';
 import './PlainView.css';
 import resume_img from './assets/Pranav_Sangani_Resume.png';
-import {ABOUT, LINKS, PROFILE} from './content';
+import {ABOUT, COURSEWORK, ENTREPRENEURSHIP, LINKS, PROFILE} from './content';
 import {PROJECTS} from './Projects';
 
 // A plain one-page version of the site for anyone who wants the essentials fast
@@ -43,6 +43,26 @@ function PlainView() {
                             ) : null}
                         </article>
                     ))}
+                </section>
+
+                <section>
+                    <h2>Coursework</h2>
+                    {COURSEWORK.map((c) => (
+                        <article className={'plain_course'} key={c.name}>
+                            <h3>
+                                {c.name} <span className={'plain_code'}>{c.code}</span>
+                                {c.inProgress ? <span className={'plain_status'}>In progress</span> : null}
+                            </h3>
+                            <p>{c.summary}</p>
+                            {c.built ? <p>Built: {c.built}</p> : null}
+                            <p className={'plain_tech'}>{c.topics}</p>
+                        </article>
+                    ))}
+                    <article className={'plain_course'}>
+                        <h3>{ENTREPRENEURSHIP.name} <span className={'plain_code'}>{ENTREPRENEURSHIP.code}</span></h3>
+                        <p>{ENTREPRENEURSHIP.summary}</p>
+                        <p className={'plain_tech'}>{ENTREPRENEURSHIP.courses}</p>
+                    </article>
                 </section>
 
                 <section>
