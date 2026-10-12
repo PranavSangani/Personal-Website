@@ -7,7 +7,7 @@ function Puzzle() {
     }
     return (
         <div>
-            <h3>I absolutely love all sorts of puzzles so try and solve one my favorites!</h3>
+            <h3>I absolutely love all sorts of puzzles, so try and solve one of my favorites!</h3>
             <h4>The King of a small country invites 1000 senators to his annual party. As a tradition, each senator
                 brings the King a bottle of wine. Soon after, the Queen discovers that one of the senators is trying to
                 assassinate the King by giving him a bottle of poisoned wine. Unfortunately, they do not know which
@@ -21,10 +21,12 @@ function Puzzle() {
             <button className={'button'} onClick={onClickToggleAnswer}>View Solution</button>
             {showAnswer ? <h4>
                 <ol>
-                    <li>Label the prisoners (A-J) and the wine bottles (0-999)</li>
-                    <li>Prisoner A drinks from every other bottle (0, 2, 4...), B from every other set of 2 bottles (0,
-                        1, 4, 5...), C from every other set of 4 bottles (0, 1, 2, 3, 8, 9, 10, 11...) and so on (powers
-                        of 2)
+                    <li>Label the prisoners (A-J) and the wine bottles (0-999), and write each bottle number in
+                        binary (10 digits, since 2^10 = 1024 covers all 1000 bottles)
+                    </li>
+                    <li>Give each prisoner one binary digit: A the 1s place, B the 2s place, C the 4s place, and so on
+                        up to J (the 512s place). Each prisoner drinks from every bottle with a 1 in their place, so A
+                        drinks bottles 1, 3, 5, 7..., B drinks 2, 3, 6, 7, 10, 11..., C drinks 4-7, 12-15... and so on
                     </li>
                     <li>Wait 24 hours to see which prisoner was poisoned. A prisoner can have 2 states (0 = alive, 1 =
                         dead)

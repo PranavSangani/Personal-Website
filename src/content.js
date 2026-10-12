@@ -20,7 +20,7 @@ export const LINKS = {
 export const PLAIN_VIEW_HASH = '#plain';
 
 export const ABOUT = [
-    "Hi, I’m Pranav! I'm a junior at Purdue University studying Computer Science, with a Certificate in Entrepreneurship and Innovation.",
+    "Hi, I'm Pranav! I'm a junior at Purdue University studying Computer Science and pursuing a Certificate in Entrepreneurship and Innovation.",
     "I'm currently interning at Axcellion, and I spent this past summer interning at Aavalar Consulting.",
     'I love building things, learning something new every day, and meeting new people. Thanks for stopping by, and feel free to look around!',
 ];
