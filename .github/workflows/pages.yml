@@ -1,8 +1,8 @@
-name: Deploy CRA to GitHub Pages
+name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - '**'          # run on pushes to any branch
+      - master        # only the live branch deploys
   workflow_dispatch:  # lets you run it manually 
 
 permissions:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
           cache: 'npm'
       - run: npm ci
       - run: npm run build

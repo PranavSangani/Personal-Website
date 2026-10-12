@@ -29,7 +29,7 @@ function Puzzle() {
                     <li>Wait 24 hours to see which prisoner was poisoned. A prisoner can have 2 states (0 = alive, 1 =
                         dead)
                     </li>
-                    <li>Line up prisoners from J -> A and give them their value (i.e. 0000000001)</li>
+                    <li>Line up prisoners from J {"->"} A and give them their value (i.e. 0000000001)</li>
                     <li>Translate this from a binary number to a decimal and that is the bottle that is poisoned.
                         (0000000001 = bottle #1, 0101010101 = 256 + 64 + 16 + 4 + 1 = Bottle #341)
                     </li>
