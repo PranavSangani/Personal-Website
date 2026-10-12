@@ -344,11 +344,13 @@ li {
 }
 
 .start_menu_avatar {
-    width: 34px;
-    height: 34px;
-    border: 1px solid #fff;
-    border-radius: 3px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #fff;
+    border-radius: 4px;
     background: #fff;
+    object-fit: cover;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .start_menu_body {
@@ -491,4 +493,129 @@ li {
     font-style: italic;
     font-weight: normal;
     vertical-align: middle;
+}
+
+/* ---------- Log off: Windows XP Welcome screen ---------- */
+.xp_welcome {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    background: #5a7edc;
+    color: #fff;
+    font-family: Tahoma, Verdana, sans-serif;
+}
+
+.xp_welcome_bar {
+    flex: 0 0 auto;
+    height: 72px;
+    background: #00309c;
+}
+
+.xp_welcome_top {
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, #5a7edc, #fff 50%, #5a7edc) 1;
+}
+
+.xp_welcome_bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 32px;
+    border-top: 2px solid transparent;
+    border-image: linear-gradient(90deg, #5a7edc, #f39c2c 50%, #5a7edc) 1;
+    font-size: 13px;
+    text-align: right;
+}
+
+.xp_welcome_main {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 0 24px;
+    background: radial-gradient(circle at 25% 30%, #a5c0f2 0%, #5a7edc 45%);
+}
+
+.xp_welcome_left {
+    text-align: right;
+}
+
+.xp_welcome_logo {
+    width: 96px;
+    height: 96px;
+}
+
+.xp_welcome_left p {
+    margin: 8px 0 0;
+    font-size: 20px;
+}
+
+.xp_welcome_divider {
+    align-self: stretch;
+    width: 1px;
+    margin: 12% 0;
+    background: linear-gradient(transparent, #fff, transparent);
+}
+
+.xp_user_tile {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 24px 10px 10px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font: inherit;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.xp_user_tile:hover,
+.xp_user_tile:focus-visible {
+    background: linear-gradient(90deg, #00309c, transparent);
+    outline: none;
+}
+
+.xp_user_tile img {
+    width: 64px;
+    height: 64px;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.xp_user_tile:hover img,
+.xp_user_tile:focus-visible img {
+    border-color: #f9c64b;
+}
+
+.xp_welcome_message {
+    font-size: 40px;
+    font-style: italic;
+    font-weight: bold;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 600px) {
+    .xp_welcome_main {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .xp_welcome_left {
+        text-align: center;
+    }
+
+    .xp_welcome_divider {
+        display: none;
+    }
+
+    .xp_welcome_bottom {
+        justify-content: center;
+        padding: 0 16px;
+        text-align: center;
+    }
 }

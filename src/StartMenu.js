@@ -5,14 +5,12 @@ import linkedin_icon from "./assets/linkedin_icon.png";
 import resume_icon from "./assets/resume_icon.png";
 import folder_icon from "./assets/folder_icon.png";
 import ie_icon from "./assets/ie.png";
+import profile_photo from "./assets/profile_photo.jpg";
 import {LINKS, PLAIN_VIEW_HASH} from "./content";
-
-// windows_logo.png lives in /public, so reference it via PUBLIC_URL.
-const windows_logo = process.env.PUBLIC_URL + '/windows_logo.png';
 
 // The classic green XP Start Menu. Each program item calls a handler passed in
 // from App and then closes the menu. External links are plain anchors.
-function StartMenu({onAbout, onResume, onProjects, onCoursework, onClose}) {
+function StartMenu({onAbout, onResume, onProjects, onCoursework, onLogOff, onClose}) {
     const run = (handler) => () => {
         handler();
         onClose();
@@ -21,7 +19,7 @@ function StartMenu({onAbout, onResume, onProjects, onCoursework, onClose}) {
     return (
         <div className={'start_menu'}>
             <div className={'start_menu_header'}>
-                <img src={windows_logo} alt={'user'} className={'start_menu_avatar'}/>
+                <img src={profile_photo} alt={''} className={'start_menu_avatar'}/>
                 <span>Pranav Sangani</span>
             </div>
 
@@ -58,7 +56,7 @@ function StartMenu({onAbout, onResume, onProjects, onCoursework, onClose}) {
             </div>
 
             <div className={'start_menu_footer'}>
-                <button className={'start_menu_footer_btn'} onClick={onClose}>
+                <button className={'start_menu_footer_btn'} onClick={onLogOff}>
                     Log Off
                 </button>
             </div>

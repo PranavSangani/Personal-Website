@@ -14,6 +14,7 @@ import Coursework from "./Coursework";
 import Taskbar from "./Taskbar";
 import XPWindow from "./XPWindow";
 import PlainView from "./PlainView";
+import LogOffScreen from "./LogOffScreen";
 import {PLAIN_VIEW_HASH} from "./content";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
@@ -34,27 +35,34 @@ const WINDOW_META = {
 // Taskbar order / z-order iteration order.
 const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
 
+// How long the XP boot screen shows before the desktop.
+const LOADING_SCREEN_MS = 1200;
+
+// Window state for a fresh desktop: only the welcome window open.
+const INITIAL_WINDOWS = {
+    notice:      {open: true,  min: false, z: 1},
+    resume:      {open: false, min: false, z: 0},
+    projects:    {open: false, min: false, z: 0},
+    coursework:  {open: false, min: false, z: 0},
+    puzzle:      {open: false, min: false, z: 0},
+    paint:       {open: false, min: false, z: 0},
+    solitaire:   {open: false, min: false, z: 0},
+    minesweeper: {open: false, min: false, z: 0},
+};
+
 class App extends React.Component {
     state = {
-        windows: {
-            notice:      {open: true,  min: false, z: 1},
-            resume:      {open: false, min: false, z: 0},
-            projects:    {open: false, min: false, z: 0},
-            coursework:  {open: false, min: false, z: 0},
-            puzzle:      {open: false, min: false, z: 0},
-            paint:       {open: false, min: false, z: 0},
-            solitaire:   {open: false, min: false, z: 0},
-            minesweeper: {open: false, min: false, z: 0},
-        },
+        windows: INITIAL_WINDOWS,
         topZ: 1,
         minesweeperKey: 0,
         startMenu: false,
         loading_screen: true,
+        loggedOff: false,
         plain: window.location.hash === PLAIN_VIEW_HASH,
     };
 
     componentDidMount() {
-        setTimeout(() => this.setState({loading_screen: false}), 3500);
+        setTimeout(() => this.setState({loading_screen: false}), LOADING_SCREEN_MS);
         document.addEventListener('mousedown', this.handleDocumentClick);
         window.addEventListener('hashchange', this.onHashChange);
     }
@@ -120,6 +128,16 @@ class App extends React.Component {
     onClickStartMenu = () => this.setState((s) => ({startMenu: !s.startMenu}));
     onCloseStartMenu = () => this.setState({startMenu: false});
 
+    // Start > Log Off shows the XP Welcome screen; logging back on starts a
+    // fresh desktop (windows closed, icons back on the grid, new Minesweeper).
+    logOff = () => this.setState({startMenu: false, loggedOff: true});
+    logOn = () => this.setState((s) => ({
+        loggedOff: false,
+        windows: INITIAL_WINDOWS,
+        topZ: 1,
+        minesweeperKey: s.minesweeperKey + 1,
+    }));
+
     // Body content for each window (some need component-local handlers/state).
     renderContent(key) {
         switch (key) {
@@ -145,6 +163,7 @@ class App extends React.Component {
 
     render() {
         if (this.state.plain) return <PlainView/>;
+        if (this.state.loggedOff) return <LogOffScreen onLogOn={this.logOn}/>;
 
         const {windows} = this.state;
         const openKeys = WINDOW_KEYS.filter((k) => windows[k].open);
@@ -189,6 +208,7 @@ class App extends React.Component {
                                                            onResume={() => this.openWindow('resume')}
                                                            onProjects={() => this.openWindow('projects')}
                                                            onCoursework={() => this.openWindow('coursework')}
+                                                           onLogOff={this.logOff}
                                                            onClose={this.onCloseStartMenu}/> : null}
 
                         <div id={'start_bar'}>
