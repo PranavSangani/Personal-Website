@@ -21,7 +21,7 @@ export const PROJECTS = [
         icon: ie_icon,
         description: 'This very website — a Windows XP desktop rebuilt in React.',
         tech: 'React, CRA, GitHub Pages',
-        live: 'https://pranavsangani.info',
+        live: 'https://pranavsangani.online',
         source: 'https://github.com/PranavSangani/Personal-Website',
     },
     {

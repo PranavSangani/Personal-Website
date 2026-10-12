@@ -1,4 +1,4 @@
-# Visit the website at https://pranavsangani.info
+# Visit the website at https://pranavsangani.online
 
 # About
 I created this website with React to mimic Windows XP, which, in my completely unbiased opinion, is the most nostalgic
