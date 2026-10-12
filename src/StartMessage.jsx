@@ -3,7 +3,7 @@ import {ABOUT, LINKS, PLAIN_VIEW_HASH, PROFILE} from './content';
 
 // The welcome window. Leads with who I am and the links a recruiter needs, then
 // the longer About sections.
-function StartMessage({onOpenResume, onOpenProjects}) {
+function StartMessage({onOpenResume, onOpenProjects, onOpenEmail}) {
     return (
         <div>
             <h2 className={'notice_name'}>{PROFILE.name}</h2>
@@ -14,7 +14,7 @@ function StartMessage({onOpenResume, onOpenProjects}) {
                 <button className={'notice_btn'} onClick={onOpenProjects}>Projects</button>
                 <a className={'notice_btn'} href={LINKS.github} target={'_blank'} rel="noreferrer">GitHub</a>
                 <a className={'notice_btn'} href={LINKS.linkedin} target={'_blank'} rel="noreferrer">LinkedIn</a>
-                <a className={'notice_btn'} href={LINKS.email}>Email</a>
+                <button className={'notice_btn'} onClick={onOpenEmail}>Email</button>
             </div>
             <p className={'notice_plain'}>
                 In a hurry? <a href={PLAIN_VIEW_HASH}>Switch to the plain view</a>

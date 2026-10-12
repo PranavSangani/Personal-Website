@@ -620,3 +620,43 @@ li {
         text-align: center;
     }
 }
+
+/* ---------- Email window ---------- */
+.email_dialog {
+    padding: 14px 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.email_dialog_row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.email_dialog_icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+}
+
+.email_dialog_label {
+    margin: 0 0 4px;
+    font-size: 13px;
+}
+
+.email_dialog_address {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    user-select: all;
+    -webkit-user-select: all;
+    overflow-wrap: anywhere;
+}
+
+.email_dialog_actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+}

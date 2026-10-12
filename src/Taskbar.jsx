@@ -5,6 +5,7 @@ import paint_icon from "./assets/paint_icon.png";
 import solitaire_icon from "./assets/solitaire_icon.png";
 import minesweeper_icon from "./assets/minesweeper_icon.png";
 import calculator_icon from "./assets/calculator_icon.png";
+import mail_icon from "./assets/mail_icon.png";
 
 const ICONS = {
     notice: notepad_icon,
@@ -15,6 +16,7 @@ const ICONS = {
     paint: paint_icon,
     solitaire: solitaire_icon,
     minesweeper: minesweeper_icon,
+    email: mail_icon,
 };
 
 // Renders one button per open window. Clicking a button minimizes the window if

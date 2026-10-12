@@ -15,6 +15,7 @@ import Taskbar from "./Taskbar";
 import XPWindow from "./XPWindow";
 import PlainView from "./PlainView";
 import LogOffScreen from "./LogOffScreen";
+import EmailDialog from "./EmailDialog";
 import {PLAIN_VIEW_HASH} from "./content";
 import loading from './assets/loading_screen.gif';
 import start from './assets/start.png';
@@ -30,10 +31,11 @@ const WINDOW_META = {
     paint:       {label: 'Paint',            title: 'Paint',            id: 'paint_window',       rect: {x: 200, y: 60,  width: 900, height: 600}},
     solitaire:   {label: 'Spider Solitaire', title: 'Spider Solitaire', id: 'solitaire_window',   rect: {x: 220, y: 60,  width: 900, height: 600}},
     minesweeper: {label: 'Minesweeper',      title: 'Minesweeper',      id: 'minesweeper_window', rect: {x: 320, y: 70,  width: 380, height: 520}},
+    email:       {label: 'Email',            title: 'Email',            id: 'email_window',       rect: {center: true, width: 420, height: 175}},
 };
 
 // Taskbar order / z-order iteration order.
-const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'paint', 'solitaire', 'minesweeper'];
+const WINDOW_KEYS = ['notice', 'resume', 'projects', 'coursework', 'puzzle', 'paint', 'solitaire', 'minesweeper', 'email'];
 
 // How long the XP boot screen shows before the desktop.
 const LOADING_SCREEN_MS = 1500;
@@ -48,6 +50,7 @@ const INITIAL_WINDOWS = {
     paint:       {open: false, min: false, z: 0},
     solitaire:   {open: false, min: false, z: 0},
     minesweeper: {open: false, min: false, z: 0},
+    email:       {open: false, min: false, z: 0},
 };
 
 class App extends React.Component {
@@ -155,10 +158,12 @@ class App extends React.Component {
         switch (key) {
             case 'notice':
                 return <StartMessageContent onOpenResume={() => this.openWindow('resume')}
-                                            onOpenProjects={() => this.openWindow('projects')}/>;
+                                            onOpenProjects={() => this.openWindow('projects')}
+                                            onOpenEmail={() => this.openWindow('email')}/>;
             case 'resume': return <Resume/>;
             case 'projects': return <Projects/>;
             case 'coursework': return <Coursework/>;
+            case 'email': return <EmailDialog/>;
             case 'puzzle': return <Puzzle/>;
             case 'paint': return <Paint/>;
             case 'solitaire': return <Solitaire/>;
@@ -201,6 +206,7 @@ class App extends React.Component {
                                onClickResume={() => this.openWindow('resume')}
                                onClickProjects={() => this.openWindow('projects')}
                                onClickCoursework={() => this.openWindow('coursework')}
+                               onClickEmail={() => this.openWindow('email')}
                                onClickPaint={() => this.openWindow('paint')}/>
 
                         {openKeys.map((key) => (

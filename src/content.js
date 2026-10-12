@@ -8,11 +8,13 @@ export const PROFILE = {
     seeking: 'Looking for Summer 2027 software engineering and AI internships',
 };
 
+export const EMAIL = 'pranavsai.sangani@gmail.com';
+
 export const LINKS = {
     resume: resume_pdf,
     github: 'https://github.com/PranavSangani',
     linkedin: 'https://www.linkedin.com/in/pranavsangani/',
-    email: 'mailto:pranavsai.sangani@gmail.com',
+    email: `mailto:${EMAIL}`,
     sortingVisualizer: 'https://pranavsangani.github.io/SortingAlgorithmVisualizer/',
 };
 

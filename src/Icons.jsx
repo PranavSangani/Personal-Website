@@ -65,7 +65,7 @@ function DesktopIcon({icon, label, onClick, href, newTab = true, selected, pos, 
 // moves together), and selected with a rubber-band box by dragging on empty
 // space. Dragging and the selection box are mouse-only so touch taps behave
 // exactly like clicks.
-function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume, onClickProjects, onClickCoursework}) {
+function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzle, onClickResume, onClickProjects, onClickCoursework, onClickEmail}) {
     const ICONS = [
         {id: 'resume', icon: resume_icon, label: 'Resume', onClick: onClickResume},
         {id: 'projects', icon: folder_icon, label: 'My Projects', onClick: onClickProjects},
@@ -77,7 +77,7 @@ function Icons({onClickPaint, onClickSolitaire, onClickMinesweeper, onClickPuzzl
         {id: 'puzzle', icon: calculator_icon, label: 'Puzzles', onClick: onClickPuzzle},
         {id: 'paint', icon: paint_icon, label: 'Paint', onClick: onClickPaint},
         {id: 'solitaire', icon: solitaire_icon, label: 'Spider Solitaire', onClick: onClickSolitaire},
-        {id: 'email', icon: mail_icon, label: 'Email', href: LINKS.email, newTab: false},
+        {id: 'email', icon: mail_icon, label: 'Email', onClick: onClickEmail},
     ];
 
     // Positions of icons the user has moved; the rest sit on the default grid.
