@@ -11,14 +11,14 @@ export const PROJECTS = [
     {
         name: 'FDA & EU Drug Data Search (Axcellion)',
         icon: search_icon,
-        description: 'End-to-end RAG pipeline over 80K+ pages of FDA drug documents with a Neo4j knowledge graph and hybrid retrieval, extended to EU drug data, plus a federated search API that answers one query across both sources.',
+        description: 'End-to-end RAG pipeline over 80K+ pages of FDA drug documents with a Neo4j knowledge graph and hybrid retrieval, extended to EU drug data and unified on shared reference data and reranking, plus a federated search API that answers one query across both sources.',
         tech: 'Python, AWS (S3, EC2), Neo4j, RAG',
-        results: '80K+ pages indexed · search accuracy up 50%+ · ~0.3 s answers with zero hallucinated answers in audit · ~30x lower cost at 99.5% accuracy',
+        results: '80K+ pages indexed · search accuracy up 50%+ · 240K+ chunks unified across FDA & EU · ~0.3 s answers with zero hallucinated answers in audit · ~30x lower cost at 99.5% accuracy',
     },
     {
         name: 'SHERPA (Aavalar Consulting)',
         icon: chat_icon,
-        description: 'AI assistant that answers employee questions from company documents with citations, with permission-aware search and Microsoft Teams and SharePoint integration.',
+        description: 'AI assistant that answers employee questions from company documents with citations, with permission-aware search (PostgreSQL row-level security) and Microsoft Teams and SharePoint integration.',
         tech: 'Python, Claude Agent SDK, MCP, PostgreSQL',
         results: '220+ automated tests running in CI · multi-agent evaluation pipeline measuring answer accuracy, refusals, and access control',
     },
